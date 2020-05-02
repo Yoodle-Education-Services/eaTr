@@ -1,17 +1,33 @@
 const mongoose = require('mongoose');
 const Rec = mongoose.model('Recipe');
 
-
 // recipesCreate controller
-const recipesCreate = (req, res) => {
-  //create method to the model
-  
+const recipesCreate=(req, res) =>{
+  Rec.create({
+    recipeName: req.body.recipeName,
+    recipeImage:req.body.recipeImage,
+    ingredients:{
+      ingredient1:req.body.ingredient1,
+      ingredient2:req.body.ingredient2,
+      ingredient3:req.body.ingredient3,
+      ingredient4:req.body.ingredient4,
+      ingredient5:req.body.ingredient5
+     //loop function is better
+    },(err, recipe) => {
+      if (err) {
+        res
+          .status(400)
+          .json(err);
+      } else {
+        res
+          .status(201)
+          .json(recipe);
+      }
+    };
+   
+  });
+}
 
-  //ingredients like facilities .... maximum ingredients to add in
-
-  //callback function containing appropriate responses for success and failure
-
-};
 
 
 
