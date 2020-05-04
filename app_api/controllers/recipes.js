@@ -1,0 +1,159 @@
+const mongoose = require('mongoose');
+const Rec = mongoose.model('Recipe');
+
+const recipesList = (req, res) => {
+    const recipes = results.map(result => {
+      return {
+        _id: result._id,
+        name: result.name,
+        ingredient: result.ingredient,
+        instruction: result.instruction
+      }
+    });
+    res
+      .status(200)
+      .json(recipes);
+  } catch (err) {
+    res
+      .status(404)
+      .json(err);
+  }
+};
+
+const recipesCreate = (req, res) => {
+  Rec.create({
+    name: req.body.name,
+    ingredients: req.body.ingredients,
+    instructions: req.body.instructions
+  }
+    ingredients: [
+      {
+        item: req.body.item1,
+        quantity: req.body.quantity1,
+        unitOfMeasure: req.body.unitOfMeasure1
+      },
+      {
+        days: req.body.days2,
+        opening: req.body.opening2,
+        closing: req.body.closing2,
+        closed: req.body.closed2
+      }
+    ]
+  },
+  (err, recipe) => {
+    if (err) {
+      res
+        .status(400)
+        .json(err);
+    } else {
+      res
+        .status(201)
+        .json(recipe);
+    }
+  });
+};
+
+const recipesReadOne = (req, res) => {
+    Rec
+      .findById(req.params.recipeid)
+      .exec((err, recipe) => {
+        if (!recipe) {
+          return res
+            .status(404)
+            .json({"message": "Recipe not found"});
+        } else if (err) {
+          return res
+            .status(404)
+            .json(err);
+        } else {
+          return res
+            .status(200)
+            .json(recipe);
+        }
+      });
+};
+
+const recipesUpdateOne = (req, res) => {
+  if (!req.params.recipeid) {
+    return res
+      .status(404)
+      .json({
+        "message": "Not found, recipeid is required"
+      });
+  }
+  Rec
+    .findById(req.params.recipeid)
+    .select('-ingredients')
+    .exec((err, recipe) => {
+      if (!recipe) {
+        return res
+          .status(404)
+          .json({
+            "message": "recipeid not found"
+          });
+      } else if (err) {
+        return res
+          .status(400)
+          .json(err);
+      }
+      recipe.name = req.body.name;
+      recipe.ingredient = req.body.ingredient;
+      recipe.unitOfMeasure = req.body.unitOfMeasure;
+      ];
+      recipe.Ingredients = [{
+        item: req.body.item1,
+        quantity: req.body.quantity1,
+        unitOfMeasure: req.body.unitOfMeasure1
+      }, {
+        days: req.body.days2,
+        opening: req.body.opening2,
+        closing: req.body.closing2,
+        closed: req.body.closed2,
+      }];
+      recipe.save((err, rec) => {
+        if (err) {
+          res
+            .status(404)
+            .json(err);
+        } else {
+          res
+            .status(200)
+            .json(rec);
+        }
+      });
+    }
+  );
+};
+
+const recipesDeleteOne = (req, res) => {
+  const {recipeid} = req.params;
+  if (recipeid) {
+    Rec
+      .findByIdAndRemove(recipeid)
+      .exec((err, recipe) => {
+          if (err) {
+            return res
+              .status(404)
+              .json(err);
+          }
+          res
+            .status(204)
+            .json(null);
+        }
+    );
+  } else {
+    res
+      .status(404)
+      .json({
+        "message": "No recipe"
+      });
+  }
+};
+
+module.exports = {
+  recipesList,
+  recipesCreate,
+  recipesReadOne,
+  recipesUpdateOne,
+  recipesDeleteOne
+};
