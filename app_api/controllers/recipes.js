@@ -74,15 +74,14 @@ const recipesReadOne = (req, res) => {
           return res
             .status(404)
             .json(err);
+        } else {
+          return res
+            .status(200)
+            .json(recipe);
         }
-        res
-          .status(200)
-          .json(recipe);
-       });
+      });
 };
 
-
-// recipesUpdateOne Controller
 const recipesUpdateOne = (req, res) => {
   if (!req.params.recipeid) {
     return res
@@ -93,6 +92,7 @@ const recipesUpdateOne = (req, res) => {
   }
   Rec
     .findById(req.params.recipeid)
+    .select('-ingredients')
     .exec((err, recipe) => {
       if (!recipe) {
         return res
@@ -105,14 +105,41 @@ const recipesUpdateOne = (req, res) => {
           .status(400)
           .json(err);
       }
-      
-// recipesDeleteOne 
-const recipesDeleteOne = (req, res) =>  {
+      recipe.name = req.body.name;
+      recipe.ingredient = req.body.ingredient;
+      recipe.unitOfMeasure = req.body.unitOfMeasure;
+      ];
+      recipe.Ingredients = [{
+        item: req.body.item1,
+        quantity: req.body.quantity1,
+        unitOfMeasure: req.body.unitOfMeasure1
+      }, {
+        days: req.body.days2,
+        opening: req.body.opening2,
+        closing: req.body.closing2,
+        closed: req.body.closed2,
+      }];
+      recipe.save((err, rec) => {
+        if (err) {
+          res
+            .status(404)
+            .json(err);
+        } else {
+          res
+            .status(200)
+            .json(rec);
+        }
+      });
+    }
+  );
+};
+
+const recipesDeleteOne = (req, res) => {
   const {recipeid} = req.params;
   if (recipeid) {
-    Rec      
-    .findByIdAndRemove(recipeid)
-      .exec((err, Recipe) =>  {
+    Rec
+      .findByIdAndRemove(recipeid)
+      .exec((err, recipe) => {
           if (err) {
             return res
               .status(404)

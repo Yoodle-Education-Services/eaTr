@@ -1,29 +1,31 @@
-const express = require('express'); // is this needed since we are doing this in angular?  does the api run in express or is it only node?
+const express = require('express');
 const router = express.Router();
-const ctrlrecipes = require('../controllers/recipes');
-const ctrlshoppingList = require('../controllers/shoppingList');
+const ctrlRecipes = require('../controllers/recipes');
+const ctrlReviews = require('../controllers/shoppingList');
 
 // recipes
 router
-    .route('/recipes')
-    .get(ctrlRecipes.recipeListByName)
-    .post(ctrlRecipes.recipesCreate);
+  .route('/recipes')
+  .get(ctrlRecipes.recipesList)
+  .post(ctrlRecipes.recipesCreate);
 
 router
-    .route('/recipes/:recipeid')
-    .get(ctrlRecipes.recipesReadOne)
-    .put(ctrlRecipes.recipesUpdateOne)
-    .delete(ctrlRecipes.recipesDeleteOne);
+  .route('/recipes/:recipeid')
+  .get(ctrlRecipes.recipesReadOne)
+  .put(ctrlRecipes.recipesUpdateOne)
+  .delete(ctrlRecipes.recipesDeleteOne);
 
-// shopping list
+// shoppingList
 router
-    .route('/shoppingList')
-    .post(ctrlshoppingList.shoppingListCreate);
+  .route('/shoppingList')
+  .get(ctrlShoppingList.ShoppingListRead);
 
 router
-    .route('/shoppingList/:shoppingListid')
-    .get(ctrlshoppingList.shoppingListReadOne)
-    .put(ctrlshoppingList.shoppingListUpdateOne)
-    .delete(ctrlshoppingList.shoppingListDeleteOne);
+  .route('/shoppingList/:shoppingListid/')
+  .put(ctrlShoppingList.shoppingListUpdate);
+
+router
+  .route('/shoppingList/:shoppingListid/:shoppingListItemid')
+  .delete(ctrlShoppingList.shoppingListDeleteOne);
 
 module.exports = router;
