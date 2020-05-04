@@ -14,6 +14,10 @@ const ingredientsSchema = new mongoose.Schema({
 });
 
 const recipeSchema = new mongoose.Schema({
+  numServed: {
+    type: String,
+    required: true
+  },
   recipeName: {
     type: String,
     required: true
