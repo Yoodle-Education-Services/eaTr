@@ -1,22 +1,16 @@
 {
-  "name": "eaTr",
+  "name": "eatr",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
-  },
-  "engines": {
-    "node": ">=12.14.1",
-    "npm": ">=6.13.4"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "mongoose": "^5.9.2",
-    "morgan": "~1.9.1",
-    "pug": "^2.0.4",
-    "request": "^2.88.2"
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
   }
 }

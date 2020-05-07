@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const host = process.env.DB_HOST || '127.0.0.1'
-const dbURL = `mongodb://${host}/Loc8r`;
-const readLine = require('readline');
+var mongoose = require('mongoose');
+var host = process.env.DB_HOST || '127.0.0.1'
+var dbURL = `mongodb://${host}/eaTr`;
+var readLine = require('readline');
 
-const connect = () => {
+var connect = () => {
   setTimeout(() => mongoose.connect(dbURL, { useNewUrlParser: true, useCreateIndex: true }), 1000);
 }
 
@@ -55,4 +55,4 @@ process.on('SIGTERM', () => {
 
 connect();
 
-require('./locations');
+require('./recipe');

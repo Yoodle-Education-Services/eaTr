@@ -4,7 +4,7 @@ const Rec = mongoose.model('Recipe');
 
 // recipesCreate controller
 //note sure of recipesCreate ???
-const recipesCreate=(req, res) =>{
+/* const recipesCreate=(req, res) =>{
   Rec.create({
     recipeName: req.body.recipeName,
     recipeImage:req.body.recipeImage, 
@@ -57,7 +57,7 @@ const recipesCreate=(req, res) =>{
   
   };
   );
-};
+}; */
 
 // recipesReadOne controller
 const recipesReadOne = (req, res) => {
@@ -105,10 +105,10 @@ const recipesUpdateOne = (req, res) => {
           .status(400)
           .json(err);
       }
-      recipe.name = req.body.name;
+      /* recipe.name = req.body.name;
       recipe.ingredient = req.body.ingredient;
       recipe.unitOfMeasure = req.body.unitOfMeasure;
-      ];
+      ]; */
       recipe.Ingredients = [{
         item: req.body.item1,
         quantity: req.body.quantity1,

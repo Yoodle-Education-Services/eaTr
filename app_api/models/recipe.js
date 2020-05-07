@@ -43,4 +43,4 @@ const chefSchema = new mongoose.Schema({
 
 mongoose.model('recipe', recipeSchema);
 mongoose.model('shoppingList', shoppingListSchema);
-mongoose.model('chef', chefSchemaSchema);
+mongoose.model('chef', chefSchema);
