@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const host = process.env.DB_HOST || '127.0.0.1'
-const dbURL = `mongodb://${host}/Loc8r`;
+const dbURL = `mongodb://${host}/eaTr`;
 const readLine = require('readline');
 
 const connect = () => {
@@ -8,16 +8,16 @@ const connect = () => {
 }
 
 mongoose.connection.on('connected', () => {
-  console.log('connected');
+  console.log('Mongoose is connected');
 });
 
 mongoose.connection.on('error', err => {
   console.log('error: ' + err);
-  return connect();
+  return connect('Mongoose connection error');
 });
 
 mongoose.connection.on('disconnected', () => {
-  console.log('disconnected');
+  console.log('Mongoose is disconnected');
 });
 
 if (process.platform === 'win32') {
@@ -55,4 +55,5 @@ process.on('SIGTERM', () => {
 
 connect();
 
-require('./locations');
+require('./recipes');
+require('./shoppingList');
