@@ -6,31 +6,33 @@ const ingredientsSchema = new mongoose.Schema({
         required: true
     },
     quantity: {
-        Number,
+        type: Number,
         required: true
     },
-    unitOfMeasure: String,
-    required: false
-});
+    unitOfMeasure: {
+        type: String,
+        required: false
+    }
+ });
 
-const recipeSchema = new mongoose.Schema({
+ const recipeSchema = new mongoose.Schema({
     recipeName: {
         type: String,
         required: true
     },
     ingredients: [ingredientsSchema],
-    instructionsSchema: {
+    instructions: {
         type: String,
         required: true
     },
     image: ({
         img: { data: Buffer, contentType: String }
-    }),
+    })
 });
 
 const shoppingListSchema = new mongoose.Schema({
-    ingredients: [ingredientsSchema],
-}),
+    ingredients: [ingredientsSchema]
+});
 
 const chefSchema = new mongoose.Schema({
     chefName: {
@@ -41,6 +43,7 @@ const chefSchema = new mongoose.Schema({
     shoppingList: [shoppingListSchema]
 });
 
+mongoose.model('ingredients', ingredientsSchema);
 mongoose.model('recipe', recipeSchema);
 mongoose.model('shoppingList', shoppingListSchema);
 mongoose.model('chef', chefSchema);
