@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const ingredientsSchema = new mongoose.Schema({
     ingredient: {
         type: String,
-        required: true
+        required: false
     },
     quantity: {
         type: Number,
-        required: true
+        required: false
     },
     unitOfMeasure: {
         type: String,
@@ -46,4 +46,4 @@ const chefSchema = new mongoose.Schema({
 mongoose.model('ingredients', ingredientsSchema);
 mongoose.model('recipe', recipeSchema);
 mongoose.model('shoppingList', shoppingListSchema);
-mongoose.model('chef', chefSchemaSchema);
+mongoose.model('chef', chefSchema);

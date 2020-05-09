@@ -6,7 +6,7 @@ const ctrlShoppingList = require('../controllers/shoppingList.js');
 // recipes
 router
     .route('/recipes')
-    .get(ctrlRecipes.recipesList)
+    //.get(ctrlRecipes.recipesList) //removed.  Will we have a sorting order for this?
     .post(ctrlRecipes.recipesCreate);
 
 router
@@ -24,7 +24,7 @@ router
 router
     .route('/shoppingList/:shoppingListid/items/:itemid')
     .get(ctrlShoppingList.shoppingListReadOne) //see notes for shoppingListRead above
-    .post(ctrlShoppingList.shoppingListCreateOne)
+    .post(ctrlShoppingList.shoppingListCreateItem)
     .put(ctrlShoppingList.shoppingListUpdateOne)
     .delete(ctrlShoppingList.shoppingListDeleteOne);
 
