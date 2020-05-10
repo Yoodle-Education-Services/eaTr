@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const Rec = mongoose.model('recipe');
 
+
+//Create
 const recipesCreate = (req, res) => {
-   /*  Rec.create({
+    Rec.create({
         recipeName: req.body.recipeName,
         instructions: req.body.instructions,
         image: req.body.image,
@@ -144,9 +146,10 @@ const recipesCreate = (req, res) => {
                     .status(201)
                     .json(recipe);
             }
-    }); */
+    });
  };
 
+ //Read
 const recipesReadOne = (req, res) => {
     Rec
       .findById(req.params.recipeid)
@@ -169,6 +172,7 @@ const recipesReadOne = (req, res) => {
       });
  };
 
+ //Update
 const recipesUpdateOne = (req, res) => {
     if (!req.params.recipeid) {
         return res
@@ -331,16 +335,16 @@ const recipesUpdateOne = (req, res) => {
                 .json(Rec);
             }
         });
-        }
+    }
   );
- };
+};
 
 const recipesDeleteOne = (req, res) => {
-    const {itemid} = req.params;
-    if (itemid) {
+    const {recipeid} = req.params;
+    if (recipeid) {
         Rec
-        .findByIdAndRemove(itemid)
-        .exec((err, item) => {
+        .findByIdAndRemove(recipeid)
+        .exec((err, recipe) => {
             if (err) {
                 return res
                 .status(404)

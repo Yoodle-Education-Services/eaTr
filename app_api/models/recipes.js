@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//Recipe Schemas
 const ingredientsSchema = new mongoose.Schema({
     ingredient: {
         type: String,
@@ -30,20 +31,45 @@ const ingredientsSchema = new mongoose.Schema({
     })
 });
 
-const shoppingListSchema = new mongoose.Schema({
-    ingredients: [ingredientsSchema]
+//Shopping List Schema
+const itemSchema = new mongoose.Schema({
+    listItem: {
+        type: String,
+        required: false
+    },
+    listQuantity: {
+        type: Number,
+        required: false
+    },
+    listUnitOfMeasure: {
+        type: String,
+        required: false
+    },
+    listItemComplete: {
+        type: Boolean,
+        required: true
+    }
+})
+
+const shoppingListNameSchema = new mongoose.Schema({
+    listName: {
+        type: String,
+        required: true
+    }
 });
 
+//Chef Schema
 const chefSchema = new mongoose.Schema({
     chefName: {
     type: String,
     required: true
     },
     recipes: [recipeSchema],
-    shoppingList: [shoppingListSchema]
+    shoppingList: [shoppingListNameSchema]
 });
 
 mongoose.model('ingredients', ingredientsSchema);
 mongoose.model('recipe', recipeSchema);
-mongoose.model('shoppingList', shoppingListSchema);
+mongoose.model('shoppingList', shoppingListNameSchema);
+mongoose.model('item', itemSchema);
 mongoose.model('chef', chefSchema);
