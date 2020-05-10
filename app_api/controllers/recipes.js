@@ -149,7 +149,7 @@ const recipesCreate = (req, res) => {
     });
  };
 
- //Read
+//Read
 const recipesReadOne = (req, res) => {
     Rec
       .findById(req.params.recipeid)
@@ -172,7 +172,7 @@ const recipesReadOne = (req, res) => {
       });
  };
 
- //Update
+//Update
 const recipesUpdateOne = (req, res) => {
     if (!req.params.recipeid) {
         return res
@@ -339,6 +339,7 @@ const recipesUpdateOne = (req, res) => {
   );
 };
 
+//Delete
 const recipesDeleteOne = (req, res) => {
     const {recipeid} = req.params;
     if (recipeid) {
