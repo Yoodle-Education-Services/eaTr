@@ -4,7 +4,7 @@ const Rec = mongoose.model('Recipe');
 
 // recipesCreate controller
 //note sure of recipesCreate ???
-const recipesCreate=(req, res) =>{
+/*const recipesCreate=(req, res) =>{
   Rec.create({
     recipeName: req.body.recipeName,
     recipeImage:req.body.recipeImage, 
@@ -22,7 +22,6 @@ const recipesCreate=(req, res) =>{
       },
       //ingredient quantity - number- required
       ingredientQuantity: req.body.ingredientQuantity1,
-      get ingredientQuantity(){
         get ingredientQuantity() {
           return this.ingredientQuantity;
         },
@@ -33,16 +32,13 @@ const recipesCreate=(req, res) =>{
      //ingredient unitofMeasure - string- not required ?? Do we want to require this?
       ingredientUnitofMeasure: req.body.ingredientUnitofMeasure1,
       get ingredientUnitofMeasure(){
-        get ingredientUnitofMeasure) {
           return this.ingredientUnitofMeasure;
         },
         set ingredientUnitofMeasure(value) {
           this.ingredientUnitofMeasure = value;
-        },
-
-      }
+        }
     ]
-  } 
+  };
   recipe.save((err,rec)=>{
     if (err){
       res
@@ -53,17 +49,13 @@ const recipesCreate=(req, res) =>{
       .status(200)
       .json(rec);
     }
-  })
-  
-  };
-  );
-};
+};*/
 
 // recipesReadOne controller
 const recipesReadOne = (req, res) => {
     Rec
       .findById(req.params.recipeid)
-      .exec((err, Recipe) => {
+      .exec((err, recipe) => {
         if (!recipe) {
           return res
             .status(404)
@@ -82,7 +74,7 @@ const recipesReadOne = (req, res) => {
       });
 };
 
-const recipesUpdateOne = (req, res) => {
+/* const recipesUpdateOne = (req, res) => {
   if (!req.params.recipeid) {
     return res
       .status(404)
@@ -132,9 +124,9 @@ const recipesUpdateOne = (req, res) => {
       });
     }
   );
-};
+};*/
 
-const recipesDeleteOne = (req, res) => {
+/*const recipesDeleteOne = (req, res) => {
   const {recipeid} = req.params;
   if (recipeid) {
     Rec
@@ -157,13 +149,13 @@ const recipesDeleteOne = (req, res) => {
         "message": "No Recipe"
       });
   }
-};
+};*/
 
 
 //
 module.exports = {
-  recipesCreate,
+//  recipesCreate,
   recipesReadOne,
-  recipesUpdateOne,
-  recipesDeleteOne
+//  recipesUpdateOne,
+//  recipesDeleteOne
 };

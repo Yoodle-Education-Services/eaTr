@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MenuBodyComponent implements OnInit {
 
   public recipeVisible: boolean = false;
+  public aboutVisible: boolean = false;
   
   constructor() { }
 

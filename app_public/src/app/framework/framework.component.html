@@ -12,7 +12,20 @@
           <a href="#" class="brand">eaTr</a>
       </span>
       <span class="navIcons">
-        <a href="#"><i class="fas fa-info-circle"></i></a>&nbsp;<a href="#"><i class="fas fa-tasks"></i></a>
+        <button class="fas fa-info-circle" [disabled]="popUpOpen" (click)="openPopUp()"></button>&nbsp;<a href="#"><i class="fas fa-tasks"></i></a>
+        <app-popup class="my-prompt" [isOpen]="popUpOpen">
+          <div class="box">
+            <header>
+              <span class="title">About</span>
+            </header>
+            <main>
+              eaTr makes meal planning easier by helping you build your shopping list. Just pick the recipes you want to make, and eaTr will automatically put together your shopping list for you!
+            </main>
+            <footer>
+              <button (click)="cancelOption()">&lt;&nbsp;Close&nbsp;&gt;</button>
+            </footer>
+          </div>
+        </app-popup>
       </span>
   </div>
   <hr class="topRowLine">

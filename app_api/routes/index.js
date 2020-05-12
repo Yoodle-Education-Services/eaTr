@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ctrlRecipes = require('../controllers/recipes');
-const ctrlReviews = require('../controllers/shoppingList');
+const ctrlShoppingList = require('../controllers/shoppingList');
 
 // recipes
 router

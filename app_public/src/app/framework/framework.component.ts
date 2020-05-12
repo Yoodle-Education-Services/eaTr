@@ -1,18 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-framework',
   templateUrl: './framework.component.html',
   styleUrls: ['./framework.component.css']
 })
-export class FrameworkComponent implements OnInit {
+
+/*export class ShoppingList {
+  item: {
+    ingredient: string;
+    quantity: number;
+    unitOfMeasure: string;
+    }
+}*/
+
+export class FrameworkComponent {
 
   public menuVisible: boolean = false;
 
-  constructor() { }
+  popUpOpen = false;
 
-  ngOnInit(): void {
+  openPopUp() {
+    this.popUpOpen = true;
+  }
+
+  cancelOption() {
+    this.popUpOpen = false;
   }
 
 }
