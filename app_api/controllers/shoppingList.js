@@ -1,214 +1,241 @@
 const mongoose = require('mongoose');
-const Rec = mongoose.model('Recipe');
+const SpL = mongoose.model('shoppingList');
+const Itm = mongoose.model('item');
 
-/* const doSetAverageRating = (location) => {
-  if (location.reviews && location.reviews.length > 0) {
-    const count = location.reviews.length;
-    const total = location.reviews.reduce((acc, {rating}) => {
-      return acc + rating;
-    }, 0);
+const sortByCompletion = (req, res) => { };       //Need to create this controller unless pipe can be made in Angular
+const sortByIngredientName = ( req, res) => { };  //Need to create this controller unless pipe can be made in Angular
 
-    location.rating = parseInt(total / count, 10);
-    location.save(err => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`Average rating updated to ${location.rating}`);
-      }
+//Create
+
+const shoppingListCreateList = (req, res) => {  
+    SpL.create({
+        listName: req.body.listName
+    },
+    (err, shoppingList) => {
+            if (err) {
+                res
+                    .status(400)
+                    .json(err);
+            } else {
+                res
+                    .status(201)
+                    .json(shoppingList);
+            }
     });
-  }
 };
 
-const updateAverageRating = (locationId) => {
-  Loc.findById(locationId)
-    .select('rating reviews')
-    .exec((err, location) => {
-      if (!err) {
-        doSetAverageRating(location);
-      }
+const shoppingListCreateItem = (req, res) => { 
+    Itm.create({
+        listItem: req.body.listItem,
+        listQuantity: req.body.listQuantity,
+        listUnitOfMeasure: req.body.listUnitOfMeasure,
+        listItemComplete: req.body.listItemComplete
+    },
+    (err, item) => {
+            if (err) {
+                res
+                    .status(400)
+                    .json(err);
+            } else {
+                res
+                    .status(201)
+                    .json(item);
+            }
     });
-}; */
+ };
 
-const doAddIngredient = (req, res, recipe) => {
-  if (!recipe) {
-    res
-      .status(404)
-      .json({"message": "Recipe not found"});
-  } else {
-    const {ingredient, quantity, unitOfMeasure} = req.body;
-    recipe.ingredients.push({
-      ingredient,
-      quantity,
-      unitOfMeasure
-    });
-    shoppingList.save((err, shoppingList) => {
-      if (err) {
-        res
-          .status(400)
-          .json(err);
-      }
-    });
-  }
-};
+ const shoppingListAddFullRecipe = (req, res) => { }; //Need to create this controller
 
-const shoppingListCreate = (req, res) => {
-  const recipeId = req.params.recipeid;
-  if (recipeId) {
-    Rec
-      .findById(recipeId)
-      .select('ingredient')
-      .exec((err, recipe) => {
-        if (err) {
-          res
-            .status(400)
-            .json(err);
-        } else {
-          doAddIngredient(req, res, shoppingList);
-        }
-      });
-  } else {
-    res
-      .status(404)
-      .json({"message": "Recipe not found"});
-  }
-};
+//Read
 
-const shoppingListRead = (req, res) => {
-  Rec
-    .findById(req.params.recipeid)
-    .select([ingredientsSchema])
-    .exec((err, recipe) => {
-      if (!recipe) {
-        return res
-          .status(404)
-          .json({"message": "Recipe not found"});
-      } else if (err) {
-        return res
-          .status(400)
-          .json(err);
-      };
-      if (recipe.ingredient && recipe.ingredients.length > 0) {
-        const ingredient = recipe.ingredients.id(req.params.ingredientid);
-        if (!ingredient) {
+const shoppingListReadList = (req, res) => {  
+    SpL
+      .findById(req.params.shoppingListid)
+      .exec((err, shoppingList) => {
+        if (!shoppingList) {
           return res
-            .status(404)
-            .json({"message": "Ingredients not found"});
-        } else {
-          const response = {
-            recipe: {
-              name: recipe.name,
-              id: req.params.recipeid
-            },
-            ingredient
-          };
-          return res
-            .status(200)
-            .json(response);
-        }
-    };
-});
-};
-
-const shoppingListUpdate = (req, res) => {
-  if (!req.params.ingredientid) {
-    return res
-      .status(404)
-      .json({
-        "message": "Not found, ingredientid required"
-      });
-  }
-  Rec
-    .findById(req.params.recipeid)
-    .select([ingredientsSchema])
-    .exec((err, recipe) => {
-      if (!recipe) {
-        return res
-          .status(404)
-          .json({
-            "message": "Recipe not found"
-          });
-      } else if (err) {
-        return res
-          .status(400)
-          .json(err);
-      }
-      if (recipe.ingredients && recipe.ingredients.length > 0) {
-        const thisIngredient = recipe.ingredients.id(req.params.ingredientid);
-        if (!thisIngredient) {
-          res
             .status(404)
             .json({
-              "message": "Ingredient not found"
+              "message": "Shopping list not found"
             });
-        } else {
-          thisIngredient.item = req.body.item;
-          thisIngredient.quantity = req.body.quantity;
-          thisIngredient.unitOfMeasure = req.body.unitOfMeasure;
-          recipe.save((err, recipe) => {
-            if (err) {
-              res
-                .status(404)
-                .json(err);
-            } 
-          });
-        }
-      } else {
-        res
-          .status(404)
-          .json({
-            "message": "No ingredient to update"
-          });
-      }
-    }
-  );
-};
-
-const shoppingListDeleteOneItem = (req, res) => {
-  const {shoppingListItemid} = req.params;
-  if (!shoppingListItemid) {
-    return res
-      .status(404)
-      .json({'message': 'Not found, shoppingListItemid required'});
-  }
-/*  Rec
-    .findById(recipeid)
-    .select([ingredientsSchema])
-    .exec((err, recipe) => {
-      if (!recipe) {
-        return res
-          .status(404)
-          .json({'message': 'Recipe not found'});
-      } else if (err) {
-        return res
-          .status(400)
-          .json(err);
-      } */
-      if (shoppingList.ingredients && shoppingList.ingredients.length > 0) {
-        if (!shoppingList.ingredients.id(ingredientid)) {
+        } else if (err) {
           return res
             .status(404)
-            .json({'message': 'Ingredient not found'});
+            .json(err);
         } else {
-          shoppingList.ingredients.id(ingredientid).remove();
-          shoppingList.save(err => {
+          return res
+            .status(200)
+            .json(shoppingList);
+        }
+      });
+ };
+
+const shoppingListReadOne = (req, res) => { 
+    Itm
+      .findById(req.params.itemid)
+      .exec((err, item) => {
+        if (!item) {
+          return res
+            .status(404)
+            .json({
+              "message": "Item not found"
+            });
+        } else if (err) {
+          return res
+            .status(404)
+            .json(err);
+        } else {
+          return res
+            .status(200)
+            .json(item);
+        }
+      });
+ };
+
+//Update
+
+const shoppingListUpdateList = (req, res) => { 
+    if (!req.params.shoppingListid) {
+        return res
+            .status(404)
+            .json({
+                "message": "Not found, shoppingListid is required"
+            });
+    }
+    SpL
+        .findById(req.params.shoppingListid)
+        .select('shoppingList')
+        .exec((err, shoppingList) => {
+        if (!shoppingList) {
+            return res
+            .status(404)
+            .json({
+                "message": "shoppingListid not found"
+            });
+        } else if (err) {
+            return res
+            .status(400)
+            .json(err);
+        }
+        shoppingList.listName = req.body.listName;
+        shoppingList.save((err, SpL) => {
             if (err) {
-              return res
+            res
                 .status(404)
                 .json(err);
             } else {
-              res
-                .status(404)
-                .json({'message': 'No ingredient to delete'});
+            res
+                .status(200)
+                .json(SpL);
             }
-          });
-        };
-      };
+        });
+        }
+  );
+ };
+
+const shoppingListUpdateOne = (req, res) => {  
+    if (!req.params.itemid) {
+        return res
+            .status(404)
+            .json({
+                "message": "Not found, itemid is required"
+            });
+    }
+    Itm
+        .findById(req.params.itemid)
+        .select('item')
+        .exec((err, item) => {
+        if (!item) {
+            return res
+            .status(404)
+            .json({
+                "message": "itemid not found"
+            });
+        } else if (err) {
+            return res
+            .status(400)
+            .json(err);
+        }
+        item.listItem = req.body.listItem;
+        item.listQuantity = req.body.listQuantity;
+        item.listUnitOfMeasure = req.body.listUnitOfMeasure;
+        item.listItemComplete = req.body.listItemComplete;
+        item.save((err, Itm) => {
+            if (err) {
+            res
+                .status(404)
+                .json(err);
+            } else {
+            res
+                .status(200)
+                .json(Itm);
+            }
+        });
+        }
+  );
+};
+
+//Delete
+const shoppingListDeleteList = (req, res) => {  
+    const {shoppingListid} = req.params;
+    if (shoppingListid) {
+        SpL
+        .findByIdAndRemove(shoppingListid)
+        .exec((err, shoppingList) => {
+            if (err) {
+                return res
+                .status(404)
+                .json(err);
+            }
+            res
+                .status(204)
+                .json(null);
+            }
+        );
+  } else {
+    res
+      .status(404)
+      .json({
+        "message": "No Item Found"
+      });
+  }
+ };
+
+const shoppingListDeleteOne = (req, res) => { 
+    const {itemid} = req.params;
+    if (itemid) {
+        Itm
+        .findByIdAndRemove(itemid)
+        .exec((err, item) => {
+            if (err) {
+                return res
+                .status(404)
+                .json(err);
+            }
+            res
+                .status(204)
+                .json(null);
+            }
+        );
+  } else {
+    res
+      .status(404)
+      .json({
+        "message": "No Item Found"
+      });
+  }
 };
 
 module.exports = {
-  shoppingListCreate,
-  shoppingListRead,
-  shoppingListUpdate,
-  shoppingListDeleteOneItem,
-  shoppingListDelete
+    sortByCompletion,
+    sortByIngredientName,
+    shoppingListCreateList,
+    shoppingListCreateItem,
+    shoppingListAddFullRecipe,
+    shoppingListReadList,
+    shoppingListReadOne,
+    shoppingListUpdateList,
+    shoppingListUpdateOne,
+    shoppingListDeleteList,
+    shoppingListDeleteOne
 };
