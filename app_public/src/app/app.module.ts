@@ -10,6 +10,8 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { HtmlLineBreaksPipe } from './html-line-breaks.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopupComponent } from './popup/popup.component';
+import { SLPopupComponent } from './slpopup/slpopup.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,12 @@ import { PopupComponent } from './popup/popup.component';
     ShoppingListComponent,
     HtmlLineBreaksPipe,
     PopupComponent,
+    SLPopupComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [FrameworkComponent]

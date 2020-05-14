@@ -12,20 +12,51 @@
           <a href="#" class="brand">eaTr</a>
       </span>
       <span class="navIcons">
-        <button class="fas fa-info-circle" [disabled]="popUpOpen" (click)="openPopUp()"></button>&nbsp;<a href="#"><i class="fas fa-tasks"></i></a>
+        <button class="fas fa-info-circle" [disabled]="popUpOpen" (click)="openPopUp()"></button>&nbsp;
+        <button class="fas fa-tasks" [disabled]="slPopUpOpen" (click)="slOpenPopUp()"></button>
         <app-popup class="my-prompt" [isOpen]="popUpOpen">
           <div class="box">
             <header>
-              <span class="title">About</span>
+              <h2 class="title">About</h2>
             </header>
             <main>
-              eaTr makes meal planning easier by helping you build your shopping list. Just pick the recipes you want to make, and eaTr will automatically put together your shopping list for you!
+              <h5>eaTr makes meal planning easier by helping you build your shopping list. Just pick the recipes you want to make, and eaTr will automatically put together your shopping list for you!</h5>
             </main>
             <footer>
-              <button (click)="cancelOption()">&lt;&nbsp;Close&nbsp;&gt;</button>
+              <button type="submit" class="btn btn-primary float" style="margin-left:15px" (click)="cancelOption()">Close</button>
             </footer>
           </div>
         </app-popup>
+        <app-slpopup class="my-prompt" [istOffen]="slPopUpOpen">
+          <div class="box">
+            <header>
+              <h2 class="title">Shopping List</h2>
+            </header>
+            <main>
+              <div id="stylized" class="myform">
+                <form id="form" name="form" action="">
+                  <hr>
+                  <div class="columnleft">
+                    <label for="item" class="col-sm-2 col-form-label">Item</label>
+                    <input type="text" name="item" id="item"/>
+                  </div>
+                  <div class="columnmiddle">
+                    <label>Quantity</label>
+                    <input type="text" name="quantity" id="quantity"/>
+                  </div>
+                  <div class="columnright">
+                    <label>Unit of Measure</label>
+                    <input type="text" name="unit of measure" id="unit of measure"/>
+                  </div>
+                </form>
+              </div>
+            </main>
+            <footer>
+              <button type="submit" class="btn btn-primary float" style="margin-left:15px" (click)="saveOption()">Save for later</button>&nbsp;
+              <button type="submit" class="btn btn-primary float" style="margin-right:15px" (click)="deleteOption()">Delete forever</button>
+            </footer>
+          </div>
+        </app-slpopup>
       </span>
   </div>
   <hr class="topRowLine">

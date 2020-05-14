@@ -21,7 +21,7 @@
   height: 100vh;
 }
 :host .pop-up > .pop-up-box {
-  text-align: center;
+  text-align: justify;
   justify-content: left;
   overflow-y: auto;
   max-height: 100vh;
@@ -32,10 +32,15 @@
   background: #00bfff;
   color: #fff;
 }
-  .column {
+  .columnleft {
   float: left;
   width: 33%;
+  }
+  .columnmiddle {
+  float: center;
+  width: 33%;
 }
-  .box {
-  justify-content: center;
+  .columnright {
+  float: right;
+  width: 33%;
 }
