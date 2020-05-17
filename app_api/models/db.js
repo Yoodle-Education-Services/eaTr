@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const host = process.env.DB_HOST || '127.0.0.1'
-const dbURL = `mongodb://${host}/eaTr`;
+const dbURL = 'mongodb://localhost/eaTr';
 const readLine = require('readline');
 
 var connect = () => {
-  setTimeout(() => mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true }), 1000);
+  setTimeout(() => mongoose.connect(dbURL, { useNewUrlParser: true, useCreateIndex: true }), 1000);
 }
 
 mongoose.connection.on('connected', () => {
@@ -53,7 +53,7 @@ process.on('SIGTERM', () => {
   });
 });
 
-//connect();
+connect();
 
 require('./recipes');
 require('./shoppingList');

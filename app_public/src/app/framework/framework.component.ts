@@ -8,11 +8,28 @@ import { ShoppingList } from '../shoppingList'
   styleUrls: ['./framework.component.css']
 })
 
-export class FrameworkComponent {
+export class FrameworkComponent implements OnInit {
 
   constructor( private eatrDataService: EaTrDataService) { }
 
   public shoppingList: ShoppingList[];
+
+  public message: string;
+
+  ngOnInit() {
+    this.getShoppingList();
+  }
+
+  private getShoppingList(): void {
+    this.message = 'Fetching shopping list now.';
+    this.eatrDataService
+      .getShoppingList()
+        .then(foundShoppingList => this.shoppingList = foundShoppingList);
+        };
+
+  private showError(error: any): void {
+    this.message = error.message;
+  }
 
   public menuVisible: boolean = false;
 
@@ -29,6 +46,10 @@ export class FrameworkComponent {
 
   slOpenPopUp() {
     this.slPopUpOpen = true;
+  }
+
+  addOption() {
+    this.slPopUpOpen = false;
   }
 
   saveOption() {

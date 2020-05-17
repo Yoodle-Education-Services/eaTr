@@ -32,8 +32,8 @@
             <header>
               <h2 class="title">Shopping List</h2>
             </header>
-            <main>
-              <div id="stylized" class="myform">
+            <main>{{this.message}}
+<!--              <div id="stylized" class="myform">
                 <form id="form" name="form" action="">
                   <hr>
                   <div class="columnleft">
@@ -49,11 +49,12 @@
                     <input type="text" name="unit of measure" id="unit of measure"/>
                   </div>
                 </form>
-              </div>
+              </div>-->
             </main>
             <footer>
-              <button type="submit" class="btn btn-primary float" style="margin-left:15px" (click)="saveOption()">Save for later</button>&nbsp;
-              <button type="submit" class="btn btn-primary float" style="margin-right:15px" (click)="deleteOption()">Delete forever</button>
+              <button type="submit" class="btn btn-primary float" style="margin-left:15px" (click)="addOption()">Add Item</button>&nbsp;
+              <button type="submit" class="btn btn-primary float" style="margin-left:15px" (click)="saveOption()">Save for later</button>
+              <button type="submit" class="btn btn-primary float" style="margin-left:15px" (click)="deleteOption()">Delete forever</button>
             </footer>
           </div>
         </app-slpopup>
