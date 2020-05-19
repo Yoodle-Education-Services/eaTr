@@ -1,4 +1,33 @@
-<span [ngSwitch]="menuVisible">
+ <!-- Modal 1 for Recipe 1-->
+ <div class="recipe-modal modal fade" id="recipeModal1" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" /></div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="modal-body">
+            <!-- recipe Details Go Here-->
+            <h2 class="text-uppercase">recipe Name</h2>
+            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+            <img class="img-fluid d-block mx-auto" src="assets/img/recipe/01-full.jpg" alt="" />
+            <p>Use this area to describe your recipe. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+              <ul class="list-inline">
+                  <li>Ingredient # 1</li>
+                  <li>Ingredient # 2</li>
+                  <li>Ingredient # 3</li>
+              </ul>
+              <button class="btn btn-primary" data-dismiss="modal" type="button"><i class="fas fa-times mr-1"></i>Close recipe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+</div>
+
+<!-- Previous Code  -->
+<!-- <span [ngSwitch]="menuVisible">
     <app-menu-body *ngSwitchCase="true" class="col-9"></app-menu-body>
     <div class="col-12 recipeFull" *ngSwitchCase="false">
         <div>
@@ -6,7 +35,7 @@
                 <h1 class="recipeName">
                     Chocolate Chip Cookies
                     <i class="fas fa-times closeRecipe" (click)="menuVisible=true"></i>
-                </h1>            
+                </h1>
             </span>
         </div>
         <div class="recipeImage">
@@ -38,4 +67,5 @@
             </ul>
         </div>
     </div>
-</span>
+</span> -->
+

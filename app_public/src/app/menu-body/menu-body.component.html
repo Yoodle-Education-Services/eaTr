@@ -1,4 +1,95 @@
-<div [ngSwitch]="recipeVisible" class="menuBodySpan">
+<section class="page-section bg-light" id="recipe">
+  <div class="container">
+    <div class="text-center">
+      <h3 class="section-subheading text-muted">Meal plan with ease!</h3>
+      <h2 class="section-heading text-uppercase"></h2>
+    </div>
+    <div class="row">
+      <!-- Recipe #1 -->
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="recipe-item">
+          <a class="recipe-link" data-toggle="modal" href="#recipeModal1">
+            <div class="recipe-hover">
+              <div class="recipe-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+            </div>
+            <img class="img-fluid" src="assets/images/avocado-vegan-salad.jpg" alt="" /></a>
+            <div class="recipe-caption">
+              <div class="recipe-caption-heading">Avocado Vegan Salad</div>
+            </div>
+        </div>
+      </div>
+      <!-- Recipe #2 -->
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="recipe-item">
+          <a class="recipe-link" data-toggle="modal" href="#recipeModal2">
+            <div class="recipe-hover">
+              <div class="recipe-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+            </div>
+            <img class="img-fluid" src="assets/images/cookies.jpg" alt="" /></a>
+            <div class="recipe-caption">
+              <div class="recipe-caption-heading">Chocolate Chips</div>
+            </div>
+        </div>
+      </div>
+       <!-- Recipe #3 -->
+       <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="recipe-item">
+          <a class="recipe-link" data-toggle="modal" href="#recipeModal3">
+            <div class="recipe-hover">
+              <div class="recipe-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+            </div>
+            <img class="img-fluid" src="assets/images/pasta.jpg" alt="" /></a>
+            <div class="recipe-caption">
+              <div class="recipe-caption-heading">Pasta</div>
+            </div>
+        </div>
+      </div>
+       <!-- Recipe #4 -->
+       <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="recipe-item">
+          <a class="recipe-link" data-toggle="modal" href="#recipeModal4">
+            <div class="recipe-hover">
+              <div class="recipe-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+            </div>
+            <img class="img-fluid" src="assets/images/pumpkin-soup.jpg" alt="" /></a>
+            <div class="recipe-caption">
+              <div class="recipe-caption-heading">Pumpkin Soup</div>
+            </div>
+        </div>
+      </div>
+      <!-- Recipe #5 -->
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="recipe-item">
+          <a class="recipe-link" data-toggle="modal" href="#recipeModal5">
+            <div class="recipe-hover">
+              <div class="recipe-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+            </div>
+            <img class="img-fluid" src="assets/images/black-olive-salad.jpg" alt="" /></a>
+            <div class="recipe-caption">
+              <div class="recipe-caption-heading">Black Olive Salad</div>
+            </div>
+        </div>
+      </div>
+      <!-- Recipe #6 -->
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="recipe-item">
+          <a class="recipe-link" data-toggle="modal" href="#recipeModal6">
+            <div class="recipe-hover">
+              <div class="recipe-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+            </div>
+            <img class="img-fluid" src="assets/images/tomatoe-tofu-salad.jpg" alt="" /></a>
+            <div class="recipe-caption">
+              <div class="recipe-caption-heading">Tomatoe Tofu Salad</div>
+            </div>
+        </div>
+      </div>
+    </div> <!--div row-->
+
+  </div> <!--div container-->
+</section>
+
+<!-- Previous Code -->
+  <!-- <div [ngSwitch]="recipeVisible" class="menuBodySpan">
     <div class="col-9 menuBody" *ngSwitchCase="false">
         <div class="recipeIcon">
             <span class="recipeThumb">
@@ -17,5 +108,6 @@
             </span>
         </div>
     </div>
+
     <app-full-recipe *ngSwitchCase="true" class="col-9 fullRecipeModule"></app-full-recipe>
-</div>
+</div> -->

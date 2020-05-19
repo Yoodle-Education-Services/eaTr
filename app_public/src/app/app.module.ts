@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { FrameworkComponent } from './framework/framework.component';
 import { FullRecipeComponent } from './full-recipe/full-recipe.component';
@@ -20,13 +21,15 @@ import { PopupComponent } from './popup/popup.component';
     SidebarComponent,
     ShoppingListComponent,
     HtmlLineBreaksPipe,
-    PopupComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
+  // bootstrap: [AppComponent],
   bootstrap: [FrameworkComponent]
 })
 export class AppModule { }
