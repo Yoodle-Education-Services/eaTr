@@ -24,35 +24,8 @@ const showError = (req, res, status) => {
   });
 };
 
-const homelist = (req, res) => {
-  const path = '/api/locations';
-  const requestOptions = {
-    url: `${apiOptions.server}${path}`,
-    method: 'GET',
-    json: {},
-    qs: {
-      lng: -0.7992599,
-      lat: 51.378091,
-      maxDistance: 20
-    }
-  };
-  request(
-    requestOptions,
-    (err, {statusCode}, body) => {
-      let data = [];
-      if (statusCode === 200 && body.length) {
-        data = body.map( (item) => {
-          item.distance = formatDistance(item.distance);
-          return item;
-        });
-      }
-      renderHomepage(req, res, data);
-    }
-  );
-};
-
-const getLocationInfo = (req, res, callback) => {
-  const path = `/api/locations/${req.params.locationid}`;
+const getrecipeInfo = (req, res, callback) => {
+  const path = `/api/recipes/${req.params.recipeid}`;
   const requestOptions = {
     url: `${apiOptions.server}${path}`,
     method: 'GET',
@@ -63,10 +36,6 @@ const getLocationInfo = (req, res, callback) => {
     (err, {statusCode}, body) => {
       const data = body;
       if (statusCode === 200) {
-        data.coords = {
-          lng: body.coords[0],
-          lat: body.coords[1]
-        }
         callback(req, res, data);
       } else {
         showError(req, res, statusCode);
@@ -75,14 +44,8 @@ const getLocationInfo = (req, res, callback) => {
   );
 };
 
-const locationInfo = (req, res) => {
-  getLocationInfo(req, res,
-    (req, res, responseData) => renderDetailPage(req, res, responseData)
-  );
-};
-
-const renderReviewForm = (req, res, {name}) => {
-  res.render('location-review-form',
+/*const renderShoppingList = (req, res, {name}) => {
+  res.render('shopping-list-form',
     {
       title: `Review ${name} on Loc8r` ,
       pageHeader: { title: `Review ${name}` },
@@ -126,11 +89,9 @@ const doAddReview = (req, res) => {
       }
     );
   }
-};
+};*/
 
 module.exports = {
-  homelist,
-  locationInfo,
-  addReview,
-  doAddReview
+  showError,
+  getrecipeInfo
 };

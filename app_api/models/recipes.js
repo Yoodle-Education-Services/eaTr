@@ -64,7 +64,7 @@ const chefSchema = new mongoose.Schema({
     type: String,
     required: true
     },
-    recipes: [recipeSchema],
+    recipe: [recipeSchema],
     shoppingList: [shoppingListNameSchema]
 });
 

@@ -1,48 +1,91 @@
 const mongoose = require('mongoose');
+const Chf = mongoose.model('chef');
 const SpL = mongoose.model('shoppingList');
 const Itm = mongoose.model('item');
 
 const sortByCompletion = (req, res) => { };       //Need to create this controller unless pipe can be made in Angular
 const sortByIngredientName = ( req, res) => { };  //Need to create this controller unless pipe can be made in Angular
 
+const doAddShoppingList = (req, res, chefId, chef) => {
+  if (!chefId) {
+  console.log("test 3", chefId)
+    res
+      .status(404)
+      .json({"message": "Recipe(s) not found"});
+  } else {
+    console.log("test4")
+    const {listItem, listQuantity, listUnitOfMeasure} = req.body;
+    chef.shoppingList.push({
+      listItem,
+      listQuantity,
+      listUnitOfMeasure
+    });
+    shoppingList.save((err, shoppingList) => {
+      if (err) {
+        res
+          .status(400)
+          .json(err);
+      } else {
+        res
+          .status(201)
+          .json(thisShoppingList);
+      }
+    });
+  }
+};
+
 //Create
 
 const shoppingListCreateList = (req, res) => {  
-    SpL.create({
-        listName: req.body.listName
-    },
-    (err, shoppingList) => {
+console.log("test1")
+      const chefId = req.params.chefid;
+      const recipeId = req.params.recipeid;
+      if (chefId) {
+        SpL
+          .findById(chefId && recipeId)
+          .select('ingredients recipe')
+          .exec((err, chef, recipe) => {
             if (err) {
-                res
-                    .status(400)
-                    .json(err);
+              res
+                .status(400)
+                .json(err);
             } else {
-                res
-                    .status(201)
-                    .json(shoppingList);
+              console.log("test 2", chefId, recipeId)
+              doAddShoppingList(req, res, chefId);
             }
-    });
+          });
+    } else {
+      res
+        .status(404)
+        .json({"message": "Recipe(s) not found"});
+    }
 };
 
 const shoppingListCreateItem = (req, res) => { 
-    Itm.create({
-        listItem: req.body.listItem,
-        listQuantity: req.body.listQuantity,
-        listUnitOfMeasure: req.body.listUnitOfMeasure,
-        listItemComplete: req.body.listItemComplete
-    },
-    (err, item) => {
+console.log("test2")
+  getListName(req, res,
+    (req, res, chef) => {
+      const chefId = req.params.chefid;
+      if (chefId) {
+        Chf
+          .findById(chefId)
+          .select('ingredients')
+          .exec((err, chef) => {
             if (err) {
-                res
-                    .status(400)
-                    .json(err);
+              res
+                .status(400)
+                .json(err);
             } else {
-                res
-                    .status(201)
-                    .json(item);
+              doAddShoppingList(req, res, chef);
             }
-    });
- };
+          });
+    } else {
+      res
+        .status(404)
+        .json({"message": "Chef not found"});
+    }
+  });
+};
 
  const shoppingListAddFullRecipe = (req, res) => { }; //Need to create this controller
 
@@ -71,26 +114,48 @@ const shoppingListReadList = (req, res) => {
  };
 
 const shoppingListReadOne = (req, res) => { 
-    Itm
-      .findById(req.params.itemid)
-      .exec((err, item) => {
-        if (!item) {
+    Chf
+      .findById(req.params.chefid)
+      .select('ingredients')
+      .exec((err, chef) => {
+        if (!chef) {
           return res
             .status(404)
             .json({
-              "message": "Item not found"
+              "message": "Chef not found"
             });
         } else if (err) {
           return res
-            .status(404)
+            .status(400)
             .json(err);
+        }
+
+        if (chef.ingredients && chef.ingredients.length > 0) {
+          const shoppingList = chef.ingredients.id(req.params.recipeid);
+
+          if (!recipe) {
+            return res
+              .status(404)
+              .json({"message": "Recipe not found"});
+          } else {
+            const response = {
+              chef: {
+                ingredients: [ingredientSchema]
+              },
+              shoppingList
+            };
+
+            return res
+              .status(200)
+              .json(response);
+          }
         } else {
           return res
-            .status(200)
-            .json(item);
+            .status(404)
+            .json({"message": "No ingredients found"});
         }
       });
- };
+};
 
 //Update
 

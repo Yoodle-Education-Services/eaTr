@@ -22,7 +22,7 @@ const chefCreate = (req, res) => {
 
 //Read
 
-const chefReadOne = (req, res) => {  
+const chefReadOne = (req, res) => {
     Chf
       .findById(req.params.chefid)
       .exec((err, chef) => {

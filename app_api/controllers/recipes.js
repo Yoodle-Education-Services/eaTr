@@ -1,9 +1,20 @@
 const mongoose = require('mongoose');
+const Chf = mongoose.model('chef');
 const Rec = mongoose.model('recipe');
-
 
 //Create
 const recipesCreate = (req, res) => {
+const chefId = req.params.chefid;
+if (chefId) {
+  Chf
+    .findById(chefId)
+    .select('recipe')
+    .exec((err, chef) => {
+      if (err) {
+        res
+          .status(400)
+          .json(err);
+      } else {
     Rec.create({
         recipeName: req.body.recipeName,
         instructions: req.body.instructions,
@@ -135,7 +146,7 @@ const recipesCreate = (req, res) => {
                 unitOfMeasure: req.body.unitOfMeasure25
             }
         ]
-    },
+    }, 
     (err, recipe) => {
             if (err) {
                 res
@@ -147,27 +158,53 @@ const recipesCreate = (req, res) => {
                     .json(recipe);
             }
     });
+      }
+    });
+    }
  };
 
 //Read
 const recipesReadOne = (req, res) => {
-    Rec
-      .findById(req.params.recipeid)
-      .exec((err, recipe) => {
-        if (!recipe) {
+    Chf
+      .findById(req.params.chefid)
+      .select('chefName recipe')
+      .exec((err, chef) => {
+        if (!chef) {
           return res
             .status(404)
             .json({
-              "message": "recipe not found"
+              "message": "Chef not found"
             });
         } else if (err) {
           return res
-            .status(404)
+            .status(400)
             .json(err);
+        }
+
+        if (chef.recipe && chef.recipe.length > 0) {
+          const recipe = chef.recipe.id(req.params.recipeid);
+
+          if (!recipe) {
+            return res
+              .status(404)
+              .json({"message": "Recipe not found"});
+          } else {
+            const response = {
+              chef: {
+                chefName: chef.chefName,
+                id: req.params.chefid
+              },
+              recipe
+            };
+
+            return res
+              .status(200)
+              .json(response);
+          }
         } else {
           return res
-            .status(200)
-            .json(recipe);
+            .status(404)
+            .json({"message": "No recipes found"});
         }
       });
  };
