@@ -49,13 +49,13 @@ const itemSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     }
-})
+});
 
 const shoppingListNameSchema = new mongoose.Schema({
-    listName: {
-        type: String,
-        required: true
-    }
+    listName:{
+      type: String,
+      required: true
+      }
 });
 
 //Chef Schema

@@ -6,21 +6,22 @@ const Itm = mongoose.model('item');
 const sortByCompletion = (req, res) => { };       //Need to create this controller unless pipe can be made in Angular
 const sortByIngredientName = ( req, res) => { };  //Need to create this controller unless pipe can be made in Angular
 
-const doAddShoppingList = (req, res, chefId, chef) => {
-  if (!chefId) {
+const doAddShoppingList = (req, res, chef) => {
+  if (!chef) {
   console.log("test 3", chefId)
     res
       .status(404)
       .json({"message": "Recipe(s) not found"});
   } else {
     console.log("test4")
-    const {listItem, listQuantity, listUnitOfMeasure} = req.body;
+    const {listName, listItem, listQuantity, listUnitOfMeasure} = req.body;
     chef.shoppingList.push({
+      listName,
       listItem,
       listQuantity,
       listUnitOfMeasure
     });
-    shoppingList.save((err, shoppingList) => {
+    chef.save((err, chef) => {
       if (err) {
         res
           .status(400)
@@ -39,23 +40,23 @@ const doAddShoppingList = (req, res, chefId, chef) => {
 const shoppingListCreateList = (req, res) => {  
 console.log("test1")
       const chefId = req.params.chefid;
-      const recipeId = req.params.recipeid;
       if (chefId) {
-        SpL
-          .findById(chefId && recipeId)
-          .select('ingredients recipe')
-          .exec((err, chef, recipe) => {
+        Chf
+          .findById(chefId)
+          .select('shoppingList')
+          .exec((err, chef) => {
             if (err) {
               res
                 .status(400)
                 .json(err);
             } else {
-              console.log("test 2", chefId, recipeId)
-              doAddShoppingList(req, res, chefId);
+              console.log("test 2", chefId)
+              doAddShoppingList(req, res, chef);
             }
           });
     } else {
       res
+        console.log("test 5", chefId)
         .status(404)
         .json({"message": "Recipe(s) not found"});
     }
