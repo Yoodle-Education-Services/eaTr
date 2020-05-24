@@ -55,7 +55,8 @@ const shoppingListNameSchema = new mongoose.Schema({
     listName:{
       type: String,
       required: true
-      }
+      },
+    items: [itemSchema]
 });
 
 //Chef Schema
