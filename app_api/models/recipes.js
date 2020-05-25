@@ -24,7 +24,7 @@ const ingredientsSchema = new mongoose.Schema({
     ingredients: [ingredientsSchema],
     instructions: {
         type: String,
-        required: true
+        required: false
     },
     image: ({
         img: { data: Buffer, contentType: String }
@@ -55,7 +55,8 @@ const shoppingListNameSchema = new mongoose.Schema({
     listName: {
         type: String,
         required: true
-    }
+    },
+    item: [itemSchema]
 });
 
 //Chef Schema
@@ -64,8 +65,9 @@ const chefSchema = new mongoose.Schema({
     type: String,
     required: true
     },
-    recipes: [recipeSchema],
-    shoppingList: [shoppingListNameSchema]
+    recipe: [recipeSchema],
+    //shoppingList: [shoppingListNameSchema]
+    item: [itemSchema] //put this here until multiple shopping lists are enabled.
 });
 
 mongoose.model('ingredients', ingredientsSchema);

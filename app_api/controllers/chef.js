@@ -22,7 +22,29 @@ const chefCreate = (req, res) => {
 
 //Read
 
-const chefReadOne = (req, res) => {  
+const chefGetAll = (req, res) => {
+    Chf.find({})
+    .exec((err, chef) => {
+      if (!chef) {
+        return res
+          .status(404)
+          .json({
+            "message": "Chef not found"
+          });
+      } else if (err) {
+        return res
+          .status(404)
+          .json(err);
+      } else {
+          console.log('chef test', chef)
+        return res
+          .status(200)
+          .json(chef);
+      }
+    });
+};
+
+const chefReadOne = (req, res) => {
     Chf
       .findById(req.params.chefid)
       .exec((err, chef) => {
@@ -113,6 +135,7 @@ const chefDeleteOne = (req, res) => {
 
 module.exports = {
     chefCreate,
+    chefGetAll,
     chefReadOne,
     chefUpdateOne,
     chefDeleteOne
