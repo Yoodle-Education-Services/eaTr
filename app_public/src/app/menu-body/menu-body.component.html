@@ -1,8 +1,10 @@
-<div [ngSwitch]="recipeVisible" class="menuBodySpan">
-    <div class="col-9 menuBody" *ngSwitchCase="false">
-        <div class="recipeIcon">
+<!--<div [ngSwitch]="recipeVisible" class="menuBodySpan">
+    <div class="col-9 menuBody" *ngSwitchCase="false">-->
+    <div class="recipes">
+      <span *ngFor="let recipeName of recipe.recipename" class="recipeIcon">{{recipeName}}</span>
+<!--        <div class="recipeIcon">
             <span class="recipeThumb">
-                <img src="assets/images/cookies.jpg" class="thumb">
+                <img class="thumb">{{image}}
             </span>
             <span class="recipeIconActions">
                 <div class="addToList">
@@ -16,6 +18,40 @@
                 </div>
             </span>
         </div>
+        <div class="recipeIcon">
+            <span class="recipeThumb">
+                <img class="thumb">{{image}}
+            </span>
+            <span class="recipeIconActions">
+                <div class="addToList">
+                    <a href="#"><i class="far fa-plus-square"></i></a>
+                </div>
+                <div class="recipeExpand">
+                    <a (click)="recipeVisible=true"><i class="fas fa-expand-arrows-alt"></i></a>
+                </div>
+                <div class="aboutExpand">
+                    <a (click)="aboutVisible=true"><i class="fas fa-times"></i></a>
+                </div>
+            </span>
+        </div>
+        <div class="recipeIcon">
+            <span class="recipeThumb">
+                <img class="thumb">{{image}}
+            </span>
+            <span class="recipeIconActions">
+                <div class="addToList">
+                    <a href="#"><i class="far fa-plus-square"></i></a>
+                </div>
+                <div class="recipeExpand">
+                    <a (click)="recipeVisible=true"><i class="fas fa-expand-arrows-alt"></i></a>
+                </div>
+                <div class="aboutExpand">
+                    <a (click)="aboutVisible=true"><i class="fas fa-times"></i></a>
+                </div>
+            </span>
+        </div>
+      </span>-->
+<!--    </div>
     </div>
-    <app-full-recipe *ngSwitchCase="true" class="col-9 fullRecipeModule"></app-full-recipe>
+    <app-full-recipe *ngSwitchCase="true" class="col-9 fullRecipeModule"></app-full-recipe>-->
 </div>

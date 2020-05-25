@@ -39,7 +39,7 @@ router
 
     // shopping list items
 router
-    .route('/chef/5eb7b803b2882326ec7ff0cd/shoppingList/5eb7bb14689a7813d445ac2f/item')
+    .route('/chef/:chefid/shoppingList/:shoppingListid/item')
     .post(ctrlShoppingList.shoppingListCreateItem)
     .post(ctrlShoppingList.shoppingListAddFullRecipe);
 

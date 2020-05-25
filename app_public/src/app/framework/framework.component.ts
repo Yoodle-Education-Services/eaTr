@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EaTrDataService } from '../ea-tr-data.service';
+import { EaTrDataService } from '../eatr-data.service';
 import { ShoppingList } from '../shoppingList'
 
 @Component({

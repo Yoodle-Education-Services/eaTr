@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Recipe } from '../shoppingList';
 
 @Component({
   selector: 'app-menu-body',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuBodyComponent implements OnInit {
 
+  public recipes: Recipe[];
   public recipeVisible: boolean = false;
   public aboutVisible: boolean = false;
   
