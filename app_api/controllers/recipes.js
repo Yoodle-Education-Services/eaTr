@@ -13,7 +13,7 @@ const doAddRecipe = (req, res, chef) => {
         chef.recipe.push({
             recipeName,
             instructions,
-
+            ingredients
         });
         chef.save((err, chef) => {
             if (err) {
@@ -200,6 +200,7 @@ const recipesCreate = (req, res) => {
 
 //Read
 const recipesReadList = (req, res) => {
+    console.log('fetching API method recipesReadList');
     Chf
         .findById(req.params.chefid)
         .select('recipe')
@@ -216,26 +217,16 @@ const recipesReadList = (req, res) => {
                     .json(err);
             }
             if (chef.recipe && chef.recipe.length > 0) {
-                console.log('chef.recipe', chef.recipe.length);  //confirm chef.recipe.length is being called
-                const recipes = chef.recipe;
-                if (!recipes) {
+                if (!chef.recipe) {
                     return res
                         .status(404)
                         .json({
                             "message": "recipes not found"
                         });
                 } else {
-                    const response = {
-                        chef : {
-                            name : chef.name,
-                            id : req.params.chefid
-                        },
-                        recipes
-                    };
-
                     return res
                         .status(200)
-                        .json(response);
+                        .json(chef.recipe);
                 }
             } else {
                 return res
@@ -249,6 +240,7 @@ const recipesReadList = (req, res) => {
 };
 
 const recipesReadOne = (req, res) => {
+    console.log('fetching API method recipesReadOne');
     Chf
         .findById(req.params.chefid)
         .select('recipe')

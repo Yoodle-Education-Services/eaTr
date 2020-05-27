@@ -1,8 +1,8 @@
 <div [ngSwitch]="recipeVisible" class="menuBodySpan">
-    <div class="col-9 menuBody" *ngSwitchCase="false">
-        <div class="recipeIcon">
+    <div class="col-12 menuBody row" *ngSwitchCase="false">
+        <div class="recipeIcon" *ngFor="let recipe of recipes">
             <span class="recipeThumb">
-                <img src="assets/images/cookies.jpg" class="thumb">
+                {{recipe.recipeName}} <!-- <img src="assets/images/cookies.jpg" class="thumb"> -->
             </span>
             <span class="recipeIconActions">
                 <div class="addToList">
