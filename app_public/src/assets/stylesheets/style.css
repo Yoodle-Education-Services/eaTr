@@ -68,6 +68,9 @@ a.brand {
 
 /*MAIN BODY*/
 
+.router {
+    align-content: center;
+}
 .menuBodyModule {
     padding: 0px;
 }
@@ -81,44 +84,51 @@ a.brand {
 }
 
 .recipeIcon {
-    width: 115px;
-    height: 150px;
+    align-items: center;
+    width: 250px;
+    height: 75px;
     padding: 0px;
     margin: 20px;
     border-color: black;
     border-width: 2px;
     background-color: #a7e3f2;
-    border-radius: 7px;
+    border-radius: 7px 7px 0px 0px;
 }
 
 .recipeThumb {
-    width: 100px;
-    height: 150px;
-    padding: 0px;
+    width: 250px;
+    height: 75px;
+    padding: 20px;
     margin: 0px;
+    text-align: center;
+    color: white;
 }
 
 .thumb {
-    width: 100px;
-    height: 150px;
+    width: 250px;
+    height: 75px;
     border-radius: 7px 0px 0px 7px;
 }
 
 .recipeIconActions {
-    width: 15px;
+    width: 250px;
     padding: 0px;
-    margin: 0px;
-    float: right;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 20px;
+    /* float: right; */
 }
 
 .addToList {
     background-color: #72a339;
     font-size: 1em;
     text-align: center;
-    width: 35px;
-    height: 75px;
-    padding-top: 28px;
-    border-radius: 0px 7px 0px 0px;
+    width: 125px;
+    height: 35px;
+    padding-left: 15px;
+    padding-top: 5px;
+    border-radius: 0px 0px 0px 7px;
+    margin-bottom: 20px;
 }
 
 .fa-plus-square {
@@ -142,9 +152,10 @@ a.brand {
     color: #fff;
     font-size: 1em;
     text-align: center;
-    width: 35px;
-    height: 75px;
-    padding-top: 28px;
+    width: 125px;
+    height: 35px;
+    padding-top: 5px;
+    padding-left: 15px;
     border-radius: 0px 0px 7px 0px;
 }
 
@@ -184,6 +195,7 @@ a.brand {
 .recipeInstructions {
     padding: 15px;
 }
+
 .closeFullRecipe {
     background-color: #a7e3f2;
     text-align: center;
@@ -211,12 +223,6 @@ li {
     color: rgb(47, 79, 79);
 }
 
-/* CREATE RECIPE */
-
-.ingredientForm {
-    margin: 15px;
-    align-content: left;
-}
 /* SIDEBAR */
 
 .sidebar {
@@ -225,6 +231,13 @@ li {
     float: right;
     background-color: lightgray;
     height: inherit;
+}
+
+/* New Recipe */
+
+.ingredientForm {
+    margin: 15px;
+    align-content: left;
 }
 
 a.newRecipeButton {
@@ -241,10 +254,8 @@ a.newRecipeButton {
     padding: 15px;
 }
 
+/* Shopping List */
+
 .shoppingList {
     padding: 15px;
 }
-/* 
-.shoppingList {
-    padding: 15px;
-} */

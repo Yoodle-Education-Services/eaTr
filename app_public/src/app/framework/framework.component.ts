@@ -21,17 +21,6 @@ export class FrameworkComponent implements OnInit {
   public chef: Chef[];
   public message: string;
 
-  /* public getChef(): void {
-    this.message = 'Searching for chef';
-    this.eatrDataService
-      .getChef()
-      .then(foundChef => {
-        this.chef = foundChef;
-        this.message = foundChef.length > 0 ? '' : 'No recipes found';
-        this.chef = foundChef;
-      });
-  } */
-
   constructor(private eatrDataService: EatrDataService) { }
 
   ngOnInit(): void {

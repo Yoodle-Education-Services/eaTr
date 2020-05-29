@@ -3,24 +3,19 @@ const SpL = mongoose.model('shoppingList');
 const Itm = mongoose.model('item');
 const Chf = mongoose.model('chef');
 
-const sortByCompletion = (req, res) => { };       //Need to create this controller unless pipe can be made in Angular
-const sortByIngredientName = ( req, res) => { };  //Need to create this controller unless pipe can be made in Angular
-
 //Create
 
 const doAddshoppingList = (req, res, chef) => {
+    console.log('create item using API method doAddshoppingList');
     if (!chef) {
         res
             .status(404)
             .json({ "message": "Chef not found" });
     } else {
-        const { listItem, listQuantity, listUnitOfMeasure, listItemComplete } = req.body;
-        console.log('test', chef.item);
+        const { listItem, listItemComplete } = req.body;
         chef.item.push({
             listItem,
-            listQuantity,
-            listUnitOfMeasure,
-            listItemComplete
+            listItemComplete,
         });
         chef.save((err, chef) => {
             if (err) {
@@ -35,7 +30,7 @@ const doAddshoppingList = (req, res, chef) => {
             }
         });
     }
-};
+};  
 
 const shoppingListCreateList = (req, res) => {
     const chefId = req.params.chefid;
@@ -59,55 +54,12 @@ const shoppingListCreateList = (req, res) => {
     }
 };
 
-//omit item.  will be used once multiple shopping lists are introduced.  will need to save to parent list.
-/* const shoppingListCreateItem = (req, res) => { 
-    Itm.create({
-        listItem: req.body.listItem,
-        listQuantity: req.body.listQuantity,
-        listUnitOfMeasure: req.body.listUnitOfMeasure,
-        listItemComplete: req.body.listItemComplete
-    },
-    (err, item) => {
-            if (err) {
-                res
-                    .status(400)
-                    .json(err);
-            } else {
-                res
-                    .status(201)
-                    .json(item);
-            }
-    });
- }; */
-
  const shoppingListAddFullRecipe = (req, res) => { }; //Need to create this controller
 
 //Read
 
-//old method
-/* const shoppingListReadList = (req, res) => {  
-    SpL
-      .findById(req.params.shoppingListid)
-      .exec((err, shoppingList) => {
-        if (!shoppingList) {
-          return res
-            .status(404)
-            .json({
-              "message": "Shopping list not found"
-            });
-        } else if (err) {
-          return res
-            .status(404)
-            .json(err);
-        } else {
-          return res
-            .status(200)
-            .json(shoppingList);
-        }
-      });
- }; */
-
  const shoppingListReadList = (req, res) => {
+    console.log('fetching API method shoppingListReadList');
     Chf
         .findById(req.params.chefid)
         .select('item')
@@ -124,26 +76,16 @@ const shoppingListCreateList = (req, res) => {
                     .json(err);
             }
             if (chef.item && chef.item.length > 0) {
-                console.log('chef.item', chef.item.length);  //confirm chef.item.length is being called
-                const item = chef.item;
-                if (!item) {
+                if (!chef.item) {
                     return res
                         .status(404)
                         .json({
                             "message": "items not found"
                         });
                 } else {
-                    const response = {
-                        chef : {
-                            name : chef.name,
-                            id : req.params.chefid
-                        },
-                        item
-                    };
-
                     return res
                         .status(200)
-                        .json(response);
+                        .json(chef.item);
                 }
             } else {
                 return res
@@ -313,8 +255,6 @@ const shoppingListDeleteOne = (req, res) => {
 };
 
 module.exports = {
-    sortByCompletion,
-    sortByIngredientName,
     doAddshoppingList,
     shoppingListCreateList,
     //shoppingListCreateItem,

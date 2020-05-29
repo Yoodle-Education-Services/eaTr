@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EatrDataService } from '../eatr-data.service';
-import { Chef, Recipe, Ingredients } from '../chef';
+import { Chef, Recipe } from '../chef';
 
 @Component({
   selector: 'app-new-recipe',
@@ -11,7 +11,6 @@ export class NewRecipeComponent implements OnInit {
 
   @Input() chef: Chef;
 
-  //public newIngredients: Ingredients = { ingredient: '', quantity: null, unitOfMeasure: '' }
   public newRecipe: Recipe = { recipeName: '', instructions: '', ingredients: '' };
 
   public formError: string; 
@@ -31,13 +30,11 @@ export class NewRecipeComponent implements OnInit {
   }
 
   public onRecipeSubmit(): void {
-    console.log('test djkfa;lkj');
     this.formError = '';
     if (this.formIsValid()) {
       this.eatrDataService.addRecipeByChefId('5ec30d3a93f206389c58748c',
         this.newRecipe)
         .then((recipe: Recipe) => {
-          console.log('Recipe saved', recipe);
           let recipes = this.chef.recipes.slice(0);
           recipes.unshift(recipe);
           this.chef.recipes = recipes;

@@ -1,18 +1,23 @@
-<div [ngSwitch]="recipeVisible" class="menuBodySpan">
-    <div class="col-12 menuBody row" *ngSwitchCase="false">
+<div class="menuBodySpan">
+    <div class="col-12 menuBody row">
         <div class="recipeIcon" *ngFor="let recipe of recipes">
-            <span class="recipeThumb">
-                {{recipe.recipeName}} <!-- <img src="assets/images/cookies.jpg" class="thumb"> -->
-            </span>
-            <span class="recipeIconActions">
-                <div class="addToList">
-                    <a href="#"><i class="far fa-plus-square"></i></a>
-                </div>
-                <div class="recipeExpand">
-                    <a (click)="recipeVisible=true"><i class="fas fa-expand-arrows-alt"></i></a>
-                </div>
-            </span>
+            <div class="recipeThumb">
+                <h4>
+                    {{recipe.recipeName}}
+                </h4>
+            </div>
+            <div class="row recipeIconActions">
+                <span class="addToList">
+                    <form (ngSubmit)="addIngredientToShoppingList(recipe._id)">
+                        <button type="submit" style="border: 0; background: none;">
+                            <i class="far fa-plus-square"></i>
+                        </button> 
+                    </form>
+                </span>
+                <span class="recipeExpand">
+                    <a routerLink="/chef/5ec30d3a93f206389c58748c/recipes/{{recipe._id}}"><i class="fas fa-expand-arrows-alt"></i></a>
+                </span>
+            </div>
         </div>
     </div>
-    <app-full-recipe *ngSwitchCase="true" class="col-9 fullRecipeMondule"></app-full-recipe>
 </div>

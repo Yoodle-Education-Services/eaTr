@@ -19,7 +19,6 @@ router
 // recipes
 router
     .route('/chef/:chefid/recipes')
-    //.get(ctrlRecipes.recipesList) //removed.  Will we have a sorting order for this?
     .get(ctrlRecipes.recipesReadList)
     .post(ctrlRecipes.recipesCreate);
 
@@ -43,12 +42,11 @@ router
     // shopping list items
 router
     .route('/chef/:chefid/shoppingList/5eb7bb14689a7813d445ac2f/item')
-    //.post(ctrlShoppingList.shoppingListCreateItem)
     .post(ctrlShoppingList.shoppingListAddFullRecipe);
 
 router
     .route('/chef/:chefid/shoppingList/5eb7bb14689a7813d445ac2f/item/:itemid')
-    .get(ctrlShoppingList.shoppingListReadOne) //see notes for shoppingListRead above
+    .get(ctrlShoppingList.shoppingListReadOne)
     .put(ctrlShoppingList.shoppingListUpdateOne)
     .delete(ctrlShoppingList.shoppingListDeleteOne);
 

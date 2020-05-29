@@ -7,22 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">  
 </head>
 <body>
-  <div class="titleBar">
-      <span class="titleName">
-          <a href="#" class="brand" (click)="bodySwitch='menu'">eaTr</a>
-      </span>
-      <span class="navIcons">
-        <!-- <a href="#"><i class="fas fa-info-circle"></i></a>&nbsp; -->
-        <a href="#"><i class="fas fa-tasks" (click)="bodySwitch='shoppingList'"></i></a>&nbsp;
-        <a href="#"><i class="fas fa-plus-circle" (click)="bodySwitch='recipe'"></i></a>
-      </span>
-  </div>
-  <hr class="topRowLine">
-    <div class="row" [ngSwitch]="bodySwitch">
-      <app-menu-body class="col-9 menuBodyModule" *ngSwitchDefault="'menu'"></app-menu-body>
-      <app-shopping-list class="col-9 shoppingListModule" *ngSwitchCase="'shoppingList'"></app-shopping-list>
-      <app-new-recipe class="col-9 newRecipeModule" *ngSwitchCase="'recipe'"></app-new-recipe>
-      <app-sidebar class="col-3 sidebar"></app-sidebar>
-    </div>
+  <app-page-header></app-page-header>
+  <router-outlet></router-outlet>
 </body>
 </html>

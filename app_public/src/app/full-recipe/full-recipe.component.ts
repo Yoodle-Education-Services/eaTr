@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { EatrDataService } from '../eatr-data.service';
 import { FrameworkComponent } from '../framework/framework.component';
-import { Recipe } from '../chef'; //commented out ingredients from recipe type
+import { Recipe } from '../chef';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-full-recipe',
@@ -11,34 +13,34 @@ import { Recipe } from '../chef'; //commented out ingredients from recipe type
 
 export class FullRecipeComponent implements OnInit {
 
-//  private getRecipeById: string;
+  /* @Input() recipe: Recipe; */
 
-  public menuVisible: boolean = false;
+  public recipe: Recipe;
+
+  public message: string;
 
   constructor(
     private eatrDataService: EatrDataService,
     private frameworkComponent: FrameworkComponent,
-    ) { }
-    
-  ngOnInit() {
-    //this.getRecipeById();
-  }
-
-  private showError(error: any): void {
-    this.message = error.message;
-  };
-
-  public recipes: Recipe[];
-  public message: string;
+    private route: ActivatedRoute,
+    ) { this.recipe = new Recipe(); }
 
   private getRecipeById(recipeId: string): void {
     this.message = 'Searching for your recipe';
-    this.eatrDataService
-      .getRecipeById(recipeId)
-      .then(foundRecipes => {
-        this.recipes = foundRecipes[0];
-        this.message = !foundRecipes ? '' : 'No recipes found';
+    this.eatrDataService.getRecipeById(recipeId)
+      .then(foundrecipe => {
+        this.recipe = foundrecipe.recipe;
+        this.message = !foundrecipe ? '' : 'No recipes found';
+        console.log('test this console log', foundrecipe.recipe);
+        console.log(foundrecipe);
       });
+      /* console.log('give recipe name', this.recipe.recipeName); */
+  }
+
+ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('recipeId');
+    console.log('id', id);
+    this.getRecipeById(id);
   }
 
 }
